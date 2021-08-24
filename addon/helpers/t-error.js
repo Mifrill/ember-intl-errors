@@ -1,6 +1,5 @@
-import Ember from 'ember';
-
-const { computed, inject, getOwner, Helper } = Ember;
+import Helper from '@ember/component/helper';
+import { inject as service } from '@ember/service';
 
 export function generateKeys(routeName, { attribute, message }) {
   const routeSegments = routeName.split('.');
@@ -17,15 +16,12 @@ export function generateKeys(routeName, { attribute, message }) {
 }
 
 export default Helper.extend({
-  i18n: inject.service(),
-
-  appController: computed(function() {
-    return getOwner(this).lookup('controller:application');
-  }),
+  intl: service(),
+  router: service(),
 
   compute([error]) {
-    const routeName = this.get('appController').currentRouteName;
+    const routeName = this.get('router.currentRouteName');
     const keys = generateKeys(routeName, error);
-    return this.get('i18n').t(keys.shift(), { default: keys });
+    return this.get('intl').t(keys.shift(), { default: keys });
   }
 });
