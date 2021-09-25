@@ -37,3 +37,29 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Test
         run: yarn test
+
+  try-scenarios:
+    name: 'Compatibility'
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        ember-try-scenario:
+          - ember-lts-3.8
+          - ember-lts-3.12
+          - ember-release
+          - ember-beta
+          - ember-canary
+          - ember-default-with-jquery
+          - ember-classic
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '12.x'
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+      - name: Test
+        run: node_modules/.bin/ember try:one ${{ matrix.ember-try-scenario }} --skip-cleanup

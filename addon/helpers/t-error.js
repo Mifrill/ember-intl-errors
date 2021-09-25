@@ -15,13 +15,13 @@ export function generateKeys(routeName, { attribute, message }) {
   return results;
 }
 
-export default Helper.extend({
-  intl: service(),
-  router: service(),
+export default class TErrorService extends Helper {
+  @service intl;
+  @service router;
 
   compute([error]) {
-    const routeName = this.get('router.currentRouteName');
+    const routeName = this.router.currentRouteName;
     const keys = generateKeys(routeName, error);
-    return this.get('intl').t(keys.shift(), { default: keys });
+    return this.intl.t(keys.shift(), { default: keys });
   }
-});
+}
