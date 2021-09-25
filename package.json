@@ -1,13 +1,14 @@
 {
   "name": "ember-intl-errors",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.0.2",
+  "description": "This addon is ember-i18n-errors implementation for ember-intl.",
   "keywords": [
+    "ember-intl",
     "ember-addon"
   ],
-  "repository": "",
+  "repository": "https://github.com/Mifrill/ember-intl-errors",
   "license": "MIT",
-  "author": "",
+  "author": "Miguel Camba | Aleksei Strizhak <alexey@teamsatchel.com>",
   "directories": {
     "doc": "doc",
     "test": "tests"
